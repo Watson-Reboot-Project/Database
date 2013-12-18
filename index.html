@@ -30,6 +30,10 @@
                     </th>
                 </thead>
                 <tbody>
+                <!-- the trouble is this two-dimensional loop. what i think is happening is that each time an item is processed, -->
+                <!-- it does the whole 'update-everything-else' cycle, and bogs everything down. It ought to be both possible and -->
+                <!-- faster to generate the whole table in straight javascript. My only concern is that it replaces a very succinct -->
+                <!-- process with a rather gross one. -->
                 <tr ng-repeat='row in relation.rows'>
                     <td ng-repeat='item in row'>
                         <span ng-bind="item"></span>
