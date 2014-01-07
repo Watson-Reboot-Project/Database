@@ -1,4 +1,4 @@
-define(['angular', 'relations', 'statements', 'uiBootstrap'], function(angular, relations_import, statements_import) {
+define(['angular', 'relations', 'statements', 'ui-bootstrap'], function(angular, relations_import, statements_import) {
   var app = angular.module('DatabaseApp', ['ui.bootstrap'])
 
   app.controller('DatabaseController', function($scope) {
