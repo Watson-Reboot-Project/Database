@@ -7,7 +7,6 @@
     <title>Database Lab</title>
     <!-- include our css pages -->
     <link rel='stylesheet' href='lib/css/bootstrap.css'>
-    <link rel='stylesheet' href='lib/css/bootstrap-theme.css'>
     <link rel='stylesheet' href='css/database.css'>
   </head>
 
@@ -16,21 +15,11 @@
     <!-- Main Container - covers entire page -->
     <div class='container'>
       <h1 class='text-center'>Watson Database Lab</h1>
-      <hr>
+      <!-- <hr> -->
       <div id='row_div' class='row'>
-        <!-- the clickable list of relations -->
-
-        <div id='list_group_div' class='col-lg-3 col-md-3'>
-          <div class='list-group list-group-sm'>
-            <!-- '$parent' required because the ng-repeat creates a new inner scope -->
-            <ul class='tile'>
-              <li class='btn btn-default list-group-item list-group-btn' data-ng-repeat='rel in relations' data-ng-model='$parent.relation' data-btn-radio='rel' data-ng-bind="rel.name"></li>
-            </ul>
-          </div>
-        </div>
 
         <!-- next to the list, two things, one on top of the other -->
-        <div class='col-lg-9 col-md-9'>
+        <div class='col-lg-9 col-md-9 col-sm-8'>
           <!-- the statement editor/history view box, and the action/accept/cancel buttons -->
           <div id='inner_row' class='row'>
 
@@ -69,10 +58,10 @@
             </span>
 
           </div>
-          <hr>
+          <!-- <hr> -->
 
           <!-- the "currently active relation" view -->
-          <div>
+          <div id='current_relation'>
             <table class='table table-striped table-condensed'>
               <tr>
                 <th data-ng-repeat='item in relation.head'>
@@ -90,6 +79,17 @@
           </div>
 
         </div>
+
+        <!-- the clickable list of relations -->
+        <div id='list_group_div' class='col-lg-3 col-md-3 col-sm-4'>
+          <div class='list-group list-group-sm'>
+            <!-- '$parent' required because the ng-repeat creates a new inner scope -->
+            <span>
+              <span class='btn btn-default list-group-item list-group-btn' data-ng-repeat='rel in relations' data-ng-model='$parent.relation' data-btn-radio='rel' data-ng-bind="rel.name"></span>
+            </span>
+          </div>
+        </div>
+
       </div> <!-- End Statement Editor View -->
     </div> <!-- End Main Container -->
     <script type='text/javascript' data-main='js/main' src='lib/js/require.js'></script>
