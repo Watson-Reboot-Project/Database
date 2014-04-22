@@ -148,8 +148,8 @@ define(function() {
     }, //}}}
   }
 
-  console.log('relations, standing by');
+  // console.log('relations, standing by');
   return relations;
 });
 
-console.log('relations.js, standing by');
+// console.log('relations.js, standing by');

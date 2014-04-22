@@ -200,10 +200,10 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'], function(angular,
       hist_insert(statements[i]);
     }
   });
-  console.log('DatabaseApp, standing by');
+  // console.log('DatabaseApp, standing by');
   return app;
 });
 
-console.log('DatabaseApp.js, standing by');
+// console.log('DatabaseApp.js, standing by');
 
 /* vim: set et sw=2 sts=2 tw=78 fdm=marker : */

@@ -17,8 +17,8 @@ define(function() {
       attributes: ['Course', 'Quarter', 'SEQ_NO']}
   ];
 
-  console.log('statements, standing by');
+  // console.log('statements, standing by');
   return statements;
 });
 
-console.log('statements.js, standing by');
+// console.log('statements.js, standing by');
