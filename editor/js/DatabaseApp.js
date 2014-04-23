@@ -1,3 +1,14 @@
+/**
+ * DatabaseApp.js
+ *
+ * The logic behind the Watson Database Lab. Defines the DatabaseApp angularjs
+ * module, and its primary controller DatabaseController, which provides the
+ * interface for the webpage.
+ *
+ * @author Tommy Bozeman
+ * @version (2014,03,28)
+ */
+
 define(['angular', 'relations', 'ui-bootstrap'], function (angular, relations) {
   // make our app object
   var app = angular.module('DatabaseApp', ['ui.bootstrap']);

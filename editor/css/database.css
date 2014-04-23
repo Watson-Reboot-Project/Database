@@ -1,42 +1,23 @@
 /* ======================================================================= */
 /* this stuff works, so far.                                               */
 /* ======================================================================= */
+/* vim: set et sts=2 sw=2 : */
 
 /* tweaking the relaiton list buttons */
 .list-group-btn {
-    text-align: left;
-    border-radius: 0px;
-    padding: 6px 12px;
+  text-align: left;
+  border-radius: 0px;
+  padding: 6px 12px;
 }
 
 /* making the dropdown-toggles more noticable */
 .dropdown-toggle {
-    cursor: pointer;
-}
-
-/* make the statement editor section stay the same size */
-.panel > .panel-footer {
-  min-height: 41px;
-}
-
-/* By default, buttons inside button groups inside vertical button groups
- * don't resize to their column. Not sure why? */
-.btn-group-vertical > .btn-group > .btn {
-  width: 100%;
+  cursor: pointer;
 }
 
 #inner_row {
   position: relative;
   min-height: 126px;
-}
-
-/* getting the padding between row items to work right */
-.row *:not(:last-child) {
-  padding-right: 0;
-}
-
-hr {
-  margin-top: 0;
 }
 
 /* adding emphasis to the button group buttons w/ thicker borders */
@@ -45,26 +26,12 @@ hr {
   border-style: solid;
 }
 
-/* ======================================================================= */
-/* this stuff is still experimental                                        */
-/* ======================================================================= */
+#editor_button_group {
+  padding-bottom: 12px;
+}
 
-/* #row_div { */
 #inner_row {
   position: relative;
-}
-
-#statement_div {
-  /* position: absolute; */
-  /* left: 195px; */
-  bottom: 0;
-}
-
-.btn-group-vertical {
-  position: absolute;
-  padding-bottom: 20px;
-  bottom: 0;
-  /* left: 975px; */
 }
 
 /* the "default" action. giving it a different look */
@@ -75,6 +42,32 @@ hr {
 .mybutton {
   padding-right: 15px;
   cursor: pointer;
+}
+
+/* remove a bit of padding from the left of the relation list. will probably
+ * need to be conditional on having a larger screen (@media) */
+@media (min-width: 768px) {
+  #list_group_div {
+      padding-left: 0;
+  }
+}
+
+/* #list_group_div *.active { */
+/*   color: white; */
+/* } */
+
+/* adding horizontal scrolling to the table. eww, but it has to be done. */
+#current_relation {
+  overflow-x: auto;
+  margin-bottom: 12px;
+}
+
+#current_relation > table {
+  margin-bottom: 0;
+}
+
+td {
+  min-width: 130px;
 }
 
 /* ======================================================================= */
