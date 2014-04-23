@@ -2,9 +2,8 @@ require.config({
   baseUrl: 'js/',
   paths: {
     angular:        '../lib/js/angular',
-    bootstrap:      '../lib/js/bootstrap-3',
+    bootstrap:      '../lib/js/bootstrap',
     jquery:         '../lib/js/jquery',
-    less:           '../lib/js/less',
     'ui-bootstrap': '../lib/js/ui-bootstrap'
   },
   shim: {
