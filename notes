@@ -26,3 +26,22 @@ For Mike:
 - i'm betting we can take the 'remove' function out of the hist object array
   and put a single one in the $scope. we'd just need some way to get that index
   into it.
+
+2013-11-11
+----------
+- final notes
+- there's a nice walkthrough version now.
+  - need to work on ease of modification
+  - that separation of data and logic thing again.
+- *`project` needs to be changed*
+  - the output order doesn't depend on the order of the statement
+
+#### List of tools:
+- git
+- angular.js
+- twitter bootstrap
+- node.js
+
+- require.js
+- less css
+- bower
