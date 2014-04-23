@@ -1,10 +1,13 @@
 require.config({
-  baseUrl: 'js/',
+  baseUrl: '.',
   paths: {
     angular:        '../lib/js/angular',
     bootstrap:      '../lib/js/bootstrap',
     jquery:         '../lib/js/jquery',
-    'ui-bootstrap': '../lib/js/ui-bootstrap'
+    'ui-bootstrap': '../lib/js/ui-bootstrap',
+    DatabaseApp:    'js/DatabaseApp',
+    relations:      'js/relations',
+    statements:     'js/statements'
   },
   shim: {
     angular: {exports: 'angular'},
