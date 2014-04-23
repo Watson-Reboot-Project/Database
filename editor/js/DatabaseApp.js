@@ -20,9 +20,10 @@ define(['angular', 'relations', 'ui-bootstrap'], function (angular, relations) {
     $scope.history = [];
 
     // a generic "error" function
-    $scope.error = function () {
-      document.write('<h1>SOMETHING WENT BAD WRONG.</h1>');
-    };
+    $scope.error = function() {
+      document.write('<h1>SOMETHING is WRONG.</h1>');
+      throw new Error("something went wrong...");
+    }
 
     // supply generic names for our created relations
     var getNextName = function () { // {{{

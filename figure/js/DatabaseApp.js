@@ -1,4 +1,16 @@
-define(['angular', 'relations', 'statements', 'ui-bootstrap'], function(angular, relations_import, statements_import) {
+/** {{{
+ * DatabaseApp.js
+ *
+ * The logic behind the Watson Database Lab. Defines the DatabaseApp angularjs
+ * module, and its primary controller DatabaseController, which provides the
+ * interface for the webpage.
+ *
+ * @author Tommy Bozeman
+ * @version (2014,03,28)
+}}} */
+define(['angular', 'relations', 'statements', 'ui-bootstrap'],
+    function(angular, relations_import, statements_import) {
+
   var app = angular.module('DatabaseApp', ['ui.bootstrap'])
 
   app.controller('DatabaseController', function($scope) {
@@ -12,7 +24,7 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'], function(angular,
       throw new Error("something went wrong...");
     }
 
-    var hist_insert = function(stmt){       // {{{
+    var hist_insert = function(stmt){ // {{{
 
       switch (stmt.action){
         case 'select':
@@ -33,9 +45,9 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'], function(angular,
           break;
       }
       $scope.history.push({stmt: stmt, processed: false});
-    }       // }}}
+    } // }}}
 
-    $scope.next = function(){       // {{{
+    $scope.next = function(){ // {{{
       if (hist_index < $scope.history.length) {
         item = $scope.history[hist_index];
         hist_index += 1;
@@ -50,10 +62,10 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'], function(angular,
           $scope.history[i].processed = false;
         }
       }
-    }       // }}}
+    } // }}}
 
     var actions = {
-      select: function(stmt) {        // {{{
+      select: function(stmt) { // {{{
 
         // declare some stuff
         var rel = $scope.relations[stmt.relation],
@@ -95,9 +107,9 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'], function(angular,
         $scope.relations[r_out.name] = r_out;
         // display it
         $scope.relation = r_out;
-      },        // }}}
+      }, // }}}
 
-      project: function(stmt) {       // {{{
+      project: function(stmt) { // {{{
 
         // declare some stuff
         var rel = $scope.relations[stmt.relation],
@@ -126,9 +138,9 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'], function(angular,
 
         $scope.relations[r_out.name] = r_out;
         $scope.relation = r_out;
-      },        // }}}
+      }, // }}}
 
-      join: function(stmt) {        // {{{
+      join: function(stmt) { // {{{
 
         // a name for our resulting relation
         var r_name = stmt.name,
@@ -187,7 +199,7 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'], function(angular,
 
         $scope.relation = r_out;
         $scope.relations[r_out.name] = r_out;
-      }         // }}}
+      } // }}}
     }
 
     // pulled in from database-simple/js/relations.js
@@ -200,10 +212,7 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'], function(angular,
       hist_insert(statements[i]);
     }
   });
-  // console.log('DatabaseApp, standing by');
   return app;
 });
-
-// console.log('DatabaseApp.js, standing by');
 
 /* vim: set et sw=2 sts=2 tw=78 fdm=marker : */

@@ -45,3 +45,15 @@ For Mike:
 - require.js
 - less css
 - bower
+
+---
+
+- considering doing a loading screen
+- figure and editor pull from the same code
+  - we accomplish this by pointing both indexes to a common main, which pull in
+    differing DatabaseApp.
+  - so how do we pull off different figures?
+  - the only difference (fairly certain) is the statements. 
+    - (feel like we worked pretty hard for that to be so)
+  - feel like we're going to have different (mostly identical) mains (rename
+    config) for each index

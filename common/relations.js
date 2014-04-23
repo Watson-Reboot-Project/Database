@@ -146,10 +146,7 @@ define(function() {
         [55555519, 100011, 'B']
       ]
     }, //}}}
-  }
+  };
 
-  // console.log('relations, standing by');
   return relations;
 });
-
-// console.log('relations.js, standing by');
