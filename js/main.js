@@ -2,20 +2,25 @@ require.config({
   baseUrl: 'js/',
   paths: {
     angular:        '../lib/js/angular',
-    bootstrap:      '../lib/js/bootstrap-3',
+    bootstrap:      '../lib/js/bootstrap',
     jquery:         '../lib/js/jquery',
-    less:           '../lib/js/less',
     'ui-bootstrap': '../lib/js/ui-bootstrap'
   },
   shim: {
     angular: {exports: 'angular'},
-    'ui-bootstrap': {deps: ['angular']}
+    'ui-bootstrap': {deps: ['angular']},
+    bootstrap: {deps: ['jquery']}
   }
 });
 
-require(['angular', 'DatabaseApp'], function(angular, app) {
-  angular.bootstrap(document, ['DatabaseApp']);
-  // console.log('require block, standing by');
+window.name = 'NG_DEFER_BOOTSTRAP!';
+
+require(['angular', 'DatabaseApp', 'bootstrap'], function(angular, app) {
+  angular.element(document).ready(function() {
+    console.log('entering require block');
+    angular.resumeBootstrap(['DatabaseApp']);
+    console.log('require block, standing by');
+  });
 });
 
-// console.log('main.js, standing by');
+console.log('main.js, standing by');
