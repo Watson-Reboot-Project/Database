@@ -1,23 +1,17 @@
 define(function() {
   var statements = [
     {
-      action: 'join',
-      name: 'Faculty_and_Courses',
-      relation1: 'faculty',
-      relation2: 'courses',
-      attribute: 'FName'
-    }, {
       action: 'select',
-      name: 'Oneal_Courses',
-      relation: 'Faculty_and_Courses',
-      attribute: 'FName',
+      name: 'CS_Majors',
+      relation: 'Students',
+      attribute: 'Major',
       condition: '==',
-      value: 'Oneal M.B.'
+      value: 'CS'
     }, {
       action: 'project',
-      name: 'Course_Quarter_SEQ_NO',
-      relation: 'Oneal_Courses',
-      attributes: ['Course', 'Quarter', 'SEQ_NO']
+      name: 'Name_of_CS_Majors',
+      relation: 'CS_Majors',
+      attributes: ['SName']
     }
   ];
   return statements;

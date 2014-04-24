@@ -2,7 +2,7 @@
 // this needs to be able to be changed (and verified?) somehow
 define(function() {
   var relations = {
-    students: { //{{{
+    Students: { //{{{
       name: 'Students',
       display_name: 'Students',
       head: ['SName', 'Age', 'Major', 'ID', 'Sex', 'Address', 'City', 'State'],
@@ -29,7 +29,7 @@ define(function() {
         ['Walker R.',     21, 'CS',   55555520, 'M', '9 Iron Drive',      'Monroe',   'LA']
       ]
     }, //}}}
-    faculty: { //{{{
+    Faculty: { //{{{
       name: 'Faculty',
       display_name: 'Faculty',
       head: ['FName', 'Dept', 'Office', 'Phone', 'SSN', 'Salary'],
@@ -43,7 +43,7 @@ define(function() {
         ['Johnson R.',    'English',    'GTM 111',  2576666, 777889999, 40000]
       ]
     }, //}}}
-    courses: { //{{{
+    Courses: { //{{{
       name: 'Courses',
       display_name: 'Courses',
       head: ['FName', 'SEQ_NO', 'Course', 'Quarter', 'Year', 'Credits'],
@@ -63,7 +63,7 @@ define(function() {
         ['Oneal M.B.',    100013, 'CS 100',   'WINTER', 2007, 3]
       ]
     }, //}}}
-    grades: { //{{{
+    Grades: { //{{{
       name: 'Grades',
       display_name: 'Grades',
       head: ['ID', 'SEQ_NO', 'Grade'],

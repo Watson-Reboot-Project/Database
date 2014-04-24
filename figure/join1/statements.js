@@ -1,10 +1,10 @@
 define(function() {
   var statements = [
     {
-      action: 'project',
+      action: 'join',
       name: 'Relation1',
-      relation: 'Courses',
-      attributes: ['Course', 'Credits']
+      relation1: 'Faculty',
+      relation2: 'Courses'
     }
   ];
   return statements;

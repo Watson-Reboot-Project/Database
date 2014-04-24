@@ -2,11 +2,11 @@ define(function() {
   var statements = [
     {
       action: 'select',
-      name: 'Students_Under_21',
-      relation: 'students',
-      attribute: 'Age',
-      condition: '<',
-      value: '21'
+      name: 'Relation1',
+      relation: 'Students',
+      attribute: 'Major',
+      condition: '==',
+      value: 'CS'
     }
   ];
   return statements;

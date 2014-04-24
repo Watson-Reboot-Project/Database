@@ -20,10 +20,6 @@ window.name = 'NG_DEFER_BOOTSTRAP!';
 
 require(['angular', 'DatabaseApp', 'bootstrap'], function(angular, app) {
   angular.element(document).ready(function() {
-    console.log('entering require block');
     angular.resumeBootstrap(['DatabaseApp']);
-    console.log('require block, standing by');
   });
 });
-
-console.log('main.js, standing by');
