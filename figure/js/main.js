@@ -22,5 +22,9 @@ window.name = 'NG_DEFER_BOOTSTRAP!';
 require(['angular', 'DatabaseApp', 'bootstrap'], function(angular, app) {
   angular.element(document).ready(function() {
     angular.resumeBootstrap(['DatabaseApp']);
+    console.log('main resumed');
   });
+  console.log('main fired');
 });
+
+console.log('main loaded');
