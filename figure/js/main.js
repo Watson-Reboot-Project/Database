@@ -1,13 +1,13 @@
 require.config({
-  baseUrl: '.',
+  baseUrl: 'database/',
   paths: {
-    angular:        '../../lib/js/angular',
-    bootstrap:      '../../lib/js/bootstrap',
-    jquery:         '../../lib/js/jquery',
-    'ui-bootstrap': '../../lib/js/ui-bootstrap',
-    relations:      '../../common/relations',
-    load:           '../../common/load',
-    DatabaseApp:    '../js/DatabaseApp',
+    angular:        'lib/js/angular',
+    bootstrap:      'lib/js/bootstrap',
+    jquery:         'lib/js/jquery',
+    'ui-bootstrap': 'lib/js/ui-bootstrap',
+    relations:      'common/relations',
+    load:           'common/load',
+    DatabaseApp:    'DatabaseApp',
     statements:     'statements'
   },
   shim: {
@@ -18,6 +18,8 @@ require.config({
 });
 
 window.name = 'NG_DEFER_BOOTSTRAP!';
+
+console.log('main got');
 
 require(['angular', 'DatabaseApp', 'bootstrap'], function(angular, app) {
   angular.element(document).ready(function() {

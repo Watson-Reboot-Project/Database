@@ -1,4 +1,5 @@
 define(function() {
+  var div_id = 'selectcsmajors_fig';
   var statements = [
     {
       action: 'select',
@@ -9,5 +10,6 @@ define(function() {
       value: 'CS'
     }
   ];
-  return statements;
+  return {div_id: div_id,
+      statements: statements};
 });

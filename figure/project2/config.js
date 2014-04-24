@@ -1,4 +1,5 @@
 define(function() {
+  var div_id = '';
   var statements = [
     {
       action: 'project',
@@ -7,5 +8,6 @@ define(function() {
       attributes: ['Course', 'Credits']
     }
   ];
-  return statements;
+  return {div_id: div_id,
+      statements: statements};
 });

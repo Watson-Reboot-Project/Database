@@ -53,7 +53,44 @@ For Mike:
   - we accomplish this by pointing both indexes to a common main, which pull in
     differing DatabaseApp.
   - so how do we pull off different figures?
-  - the only difference (fairly certain) is the statements. 
+  - the only difference (fairly certain) is the statements.
     - (feel like we worked pretty hard for that to be so)
   - feel like we're going to have different (mostly identical) mains (rename
     config) for each index
+
+---
+
+# **PROBLEM**
+- so my figures were all each in their own directory. it meant that WAIT THAT
+  MIGHT WORK okay
+- all teh figures were their own directories
+- therefore, pointing at a config was easy: it was always the same place
+- we can't point to the same relative pathname now, because we're all in the
+  same directory
+- ergo, they would all point to the same file
+- however, doesn't matter, because none of the base html files are the same
+  now anyways
+- we just point each base file to its own `main.js`, which sets up everything...
+- okay, we need to defrag real quick. what does the whole thing look like?
+
+---
+
+- we have `lib/`, `common/`, `js/` ... we don't need common anymore.
+- we have `lib/`, `js/`, `css/`, and our slew of html siblings
+- in `js/`, we have a set of mirroring `config.js` (adapted from `main.js` and
+  multiple `statements.js`)
+- each base html will have a number of magic divs, and a script-link to it's
+  mirroring config
+- the config will
+  - set up the datastructures (`statements`, `div_ids`, and `fig_ids`)
+  - read in each fragment html section...
+  - we need to uniqely identify each `fragment` pulled in
+  - jquery: when ajaxing in the piece, html manipulation and stick on an id?
+  - pop the statements into placepull in the `DatabaseApp`
+  - (which will be converted to accept parameters?).
+- *We don't know what having multiple figures on the same page will look like*
+
+### Putting multiple figures on the same page
+- (will be using magic divs)
+- what comes to mind is using ...
+

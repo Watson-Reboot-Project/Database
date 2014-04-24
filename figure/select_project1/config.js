@@ -1,4 +1,5 @@
 define(function() {
+  var div_id = '';
   var statements = [
     {
       action: 'select',
@@ -14,5 +15,6 @@ define(function() {
       attributes: ['SName']
     }
   ];
-  return statements;
+  return {div_id: div_id,
+      statements: statements};
 });

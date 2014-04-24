@@ -1,4 +1,5 @@
 define(function() {
+  var div_id = '';
   var statements = [
     {
       action: 'join',
@@ -27,5 +28,6 @@ define(function() {
       attributes: ['Course', 'SEQ_NO', 'FName', 'Office', 'Phone']
     }
   ];
-  return statements;
+  return {div_id: div_id,
+      statements: statements};
 });

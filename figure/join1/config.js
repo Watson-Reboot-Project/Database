@@ -1,4 +1,5 @@
 define(function() {
+  var div_id = '';
   var statements = [
     {
       action: 'join',
@@ -8,5 +9,6 @@ define(function() {
       attribute: 'FName'
     }
   ];
-  return statements;
+  return {div_id: div_id,
+      statements: statements};
 });

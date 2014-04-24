@@ -9,10 +9,10 @@
  * @version (2014,03,28)
 }}} */
 
-define(['angular', 'relations', 'statements', 'load', 'ui-bootstrap'],
-    function (angular, relations_import, statements_import, loader) {
+define(['angular', 'relations', 'config', 'load', 'ui-bootstrap'],
+    function (angular, relations_import, config, loader) {
 
-  loader('../fragment.html', 'magic-div');
+  loader(config.div_id, 'magic-div');
 
   var app = angular.module('DatabaseApp', ['ui.bootstrap'])
 
@@ -209,7 +209,7 @@ define(['angular', 'relations', 'statements', 'load', 'ui-bootstrap'],
     $scope.relations = relations_import;
 
     // pulled in from database-simple/js/statements.js
-    var statements = statements_import;
+    var statements = config.statements;
 
     for (var i = 0; i < statements.length; i++){
       hist_insert(statements[i]);
