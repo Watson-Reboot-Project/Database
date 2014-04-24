@@ -1,4 +1,4 @@
-/**
+/** {{{
  * DatabaseApp.js
  *
  * The logic behind the Watson Database Lab. Defines the DatabaseApp angularjs
@@ -7,9 +7,13 @@
  *
  * @author Tommy Bozeman
  * @version (2014,03,28)
- */
+}}} */
 
-define(['angular', 'relations', 'ui-bootstrap'], function (angular, relations) {
+define(['angular', 'relations', 'load', 'ui-bootstrap'],
+    function (angular, relations, loader) {
+
+  loader('fragment.html', 'magic-div');
+
   // make our app object
   var app = angular.module('DatabaseApp', ['ui.bootstrap']);
 
@@ -88,7 +92,6 @@ define(['angular', 'relations', 'ui-bootstrap'], function (angular, relations) {
           $scope.relation = $scope.history[$scope.history.length - 1].relation;
         }
       }});
-      console.log($scope.history[index].relation.statement);
     }; // }}}
 
     // return an object to handle a 'select' action
@@ -345,7 +348,6 @@ define(['angular', 'relations', 'ui-bootstrap'], function (angular, relations) {
             for (var j = 0; j < relB.rows.length; j++) {
               // if the entries for our attribute-in-question are the same:
               if (relA.rows[i][indexA] == relB.rows[j][indexB]) {
-                console.log(relA.rows[i][indexA], relB.rows[j][indexB]);
                 // join the tuples!
                 // 'k' keeps track through the individual tuples, 'p' keeps track
                 // of them together (keeps us in sync w/ 'both')
@@ -388,11 +390,6 @@ define(['angular', 'relations', 'ui-bootstrap'], function (angular, relations) {
     // pulled in from database/js/relations.js
     $scope.relations = relations;
   });
-
-  console.log('DatabaseApp, standing by');
-  return 'this is some return value';
 });
-
-console.log('DatabaseApp.js, standing by');
 
 /* vim: set et sw=2 sts=2 fdm=marker : */

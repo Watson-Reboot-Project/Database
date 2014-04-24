@@ -8,8 +8,11 @@
  * @author Tommy Bozeman
  * @version (2014,03,28)
 }}} */
-define(['angular', 'relations', 'statements', 'ui-bootstrap', 'load'],
-    function(angular, relations_import, statements_import) {
+
+define(['angular', 'relations', 'statements', 'load', 'ui-bootstrap'],
+    function (angular, relations_import, statements_import, loader) {
+
+  loader('../fragment.html', 'magic-div');
 
   var app = angular.module('DatabaseApp', ['ui.bootstrap'])
 
