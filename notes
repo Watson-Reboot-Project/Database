@@ -92,5 +92,8 @@ For Mike:
 
 ### Putting multiple figures on the same page
 - (will be using magic divs)
-- what comes to mind is using ...
-
+- what comes to mind is using multiple controllers.
+- got it:
+  - when loading in items, tack on top-level attribute `ng-init` -> `init(div_id)`
+  - set up some service that has all the data in it as a mapping
+  - each controller instance looks up its div and grabs that statement list
