@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app='DatabaseApp'>
   <head>
     <meta charset="utf-8">
 
@@ -79,13 +79,15 @@
         For example, to answer the question “Who is currently majoring in computer science?”, we can construct a relation that contains the names of all CS majors. All that is required is the following sequence of two relational queries:
       </p>
 
-      <p class="Subfigure">
-        CS_Majors &#8592; Select from Students where Major = “CS”
-      </p>
+      <!-- <p class="Subfigure"> -->
+      <!--   CS_Majors &#8592; Select from Students where Major = “CS” -->
+      <!-- </p> -->
 
-      <p class="Subfigure">
-        Names_of_CS_Majors &#8592; Project Sname from CS_Majors
-      </p>
+      <!-- <p class="Subfigure"> -->
+      <!--   Names_of_CS_Majors &#8592; Project Sname from CS_Majors -->
+      <!-- </p> -->
+
+      <div id='select_project1'></div>
 
       <p>
         The first command creates a table, named CS_Majors, that is based on the “Students” relation but only contains those tuples that contain information about CS majors. The second statement projects the name attribute from the “CS_Majors” relation, producing a table that contains only the names of CS majors.
@@ -99,21 +101,23 @@
         The other questions listed above can be answer by constructing a series of relational commands that use both “select” and “project”. For example, “Who taught CS 100 in the Fall of 2012?” can be answered with the following sequence of commands:
       </p>
 
-      <p class="Subfigure">
-        CS100 &#8592; Select from Courses where Course = “CS100”
-      </p>
+      <!-- <p class="Subfigure"> -->
+      <!--   CS100 &#8592; Select from Courses where Course = “CS100” -->
+      <!-- </p> -->
 
-      <p class="Subfigure">
-        CS100_2012 &#8592; Select from CS100 where Year = 2012
-      </p>
+      <!-- <p class="Subfigure"> -->
+      <!--   CS100_2012 &#8592; Select from CS100 where Year = 2012 -->
+      <!-- </p> -->
 
-      <p class="Subfigure">
-        CS100_Fall_2012 &#8592; Select from CS100_2012 where Quarter = “Fall”
-      </p>
+      <!-- <p class="Subfigure"> -->
+      <!--   CS100_Fall_2012 &#8592; Select from CS100_2012 where Quarter = “Fall” -->
+      <!-- </p> -->
 
-      <p class="Subfigure">
-        CS100_Fall_2012_Instructors &#8592; Project Fname from CS100_Fall_2012
-      </p>
+      <!-- <p class="Subfigure"> -->
+      <!--   CS100_Fall_2012_Instructors &#8592; Project Fname from CS100_Fall_2012 -->
+      <!-- </p> -->
+
+      <div id='select_project2'></div>
 
       <p>
         The first “select” gets information on CS 100 courses. The second “select” narrows this down to CS 100 courses taught in 2012. The third “select” narrows the data even further to the sections of CS 100 taught during the fall quarter of 2012. The final statement projects only the faculty members’ names, so that the resulting relation answers the original question: “Who taught CS 100 in the Fall of 2012?”. For our example university database, the final relation consists of a single entry “ONeal M.B.” Given different data, the final table might have contained multiple entries, since it is possible that a number of different instructors could have taught separate sections of CS 100 in the fall of 2012.
@@ -255,5 +259,6 @@
         ga('send', 'pageview');
       </script>
 
+  <script type='text/javascript' data-main='figure/js/2b4_config' src='lib/js/require.js'></script>
   </body>
 </html>

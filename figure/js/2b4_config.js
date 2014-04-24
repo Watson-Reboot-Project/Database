@@ -22,7 +22,7 @@ window.name = 'NG_DEFER_BOOTSTRAP!';
 require(['angular', 'DatabaseApp', 'load', 'bootstrap'],
   function(angular, app, load) {
 
-    var divs = ['select1'];
+    var divs = ['select_project1', 'select_project2'];
     var name = 'figure/fragment.html';
 
     for (var i = 0; i < divs.length; i++) {

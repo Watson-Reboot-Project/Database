@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app='DatabaseApp'>
   <head>
     <meta charset="utf-8">
 
@@ -15,6 +15,7 @@
     <link href = "../lib/css/bootstrap.css" rel = "stylesheet">
     <link href = "../lib/css/styles2.css" rel = "stylesheet">
     <link href = "../lib/css/generalmedia.css" rel = "stylesheet">
+    <link href = "figure/css/database.css" rel = "stylesheet">
     <!-- Java Script files -->
     <script type="text/javascript" src="../lib/js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../lib/js/bootstrap.min.js"></script>
@@ -58,7 +59,9 @@
         The relation produced by this expression, Rel1, will contain all of the attributes of both Courses and Faculty (with the exception that Fname will be listed only once). Hence, there would be 11 attributes in the resulting relation: Fname, Seq_no, Course, Quarter, Year, Credits, Dept, Office, Phone, SSN, and Salary. Due to the fact that the Fname field in each row of Courses will match up with one (and only one) Fname entry in the Faculty relation, Rel1 will contain exactly the same number of tuples as Courses, eleven.
       </p>
 
-      <img src="images/rel4expressions.png" alt="A relation, Rel4, together with the expressions that generated it" class="Image">
+      <!-- <img src="images/rel4expressions.png" alt="A relation, Rel4, together with the expressions that generated it" class="Image"> -->
+
+      <div id='all1'></div>
 
       <p class="Figure">
         <span class="figNum rel4expressions"></span> A relation, Rel4, together with the expressions that generated it
@@ -333,5 +336,6 @@
       ga('send', 'pageview');
     </script>
 
+  <script type='text/javascript' data-main='figure/js/2b6_config' src='lib/js/require.js'></script>
   </body>
 </html>

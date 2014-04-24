@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app='DatabaseApp'>
   <head>
     <meta charset="utf-8">
 
@@ -15,6 +15,7 @@
     <link href = "../lib/css/bootstrap.css" rel = "stylesheet">
     <link href = "../lib/css/styles2.css" rel = "stylesheet">
     <link href = "../lib/css/generalmedia.css" rel = "stylesheet">
+    <link href = "figure/css/database.css" rel = "stylesheet">
     <!-- Java Script files -->
     <script type="text/javascript" src="../lib/js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../lib/js/bootstrap.min.js"></script>
@@ -76,7 +77,9 @@
         <span class="figNum coursesrelation"></span> presents another relation from our university database. This relation, the “Courses” relation, contains information about the university’s course offerings. The relation would contain an entry for every section of every course ever offered. Each row, or tuple, of this relation includes the name of the faculty member who taught the course, the sequence number of the particular section, the name of the course, the quarter and year offered, and the number of credit hours the course is worth.
       </p>
 
-      <img src="images/projectfaculty.png" alt="Results of Project Fname, Phone from Faculty" class="Image">
+      <!-- <img src="images/projectfaculty.png" alt="Results of Project Fname, Phone from Faculty" class="Image"> -->
+
+      <div id='project1'></div>
 
       <p class="Figure">
         <span class="figNum projectfaculty"></span> Results of Project Fname, Phone from Faculty
@@ -104,7 +107,9 @@
         Note that the relation of <span class="figNum projectcourses"></span> contains only eight tuples, whereas there are eleven tuples in its parent relation, “Courses”. The reason for this discrepancy is that duplicate entries have been eliminated. Relations are generally considered to “sets” of tuples, and as such, duplicate entries are not allowed. “Project” operations often generate tables that contain some duplicate rows, but most relational database packages will delete these duplicates automatically.
       </p>
 
-      <img src="images/projectcourses.png" alt="Results of Project Course, Credits from Courses" class="Image">
+      <!-- <img src="images/projectcourses.png" alt="Results of Project Course, Credits from Courses" class="Image"> -->
+
+      <div id='project2'></div>
 
       <p class="Figure">
         <span class="figNum projectcourses"></span> Results of Project Course, Credits from Courses
@@ -197,5 +202,6 @@
         ga('send', 'pageview');
       </script>
 
+  <script type='text/javascript' data-main='figure/js/2b3_config' src='lib/js/require.js'></script>
   </body>
 </html>
