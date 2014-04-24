@@ -7,7 +7,8 @@ require.config({
     'ui-bootstrap': '../../lib/js/ui-bootstrap',
     DatabaseApp:    '../js/DatabaseApp',
     relations:      '../../common/relations',
-    statements:     'statements'
+    statements:     'statements',
+    load:           '../js/load'
   },
   shim: {
     angular: {exports: 'angular'},

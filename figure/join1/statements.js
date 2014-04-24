@@ -4,7 +4,8 @@ define(function() {
       action: 'join',
       name: 'Relation1',
       relation1: 'Faculty',
-      relation2: 'Courses'
+      relation2: 'Courses',
+      attribute: 'FName'
     }
   ];
   return statements;

@@ -8,7 +8,7 @@
  * @author Tommy Bozeman
  * @version (2014,03,28)
 }}} */
-define(['angular', 'relations', 'statements', 'ui-bootstrap'],
+define(['angular', 'relations', 'statements', 'ui-bootstrap', 'load'],
     function(angular, relations_import, statements_import) {
 
   var app = angular.module('DatabaseApp', ['ui.bootstrap'])
