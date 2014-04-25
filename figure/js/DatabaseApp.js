@@ -34,12 +34,20 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
         // pulled in from database-simple/js/relations.js
         $scope.relations = relations_import;
 
-        statements = statementService[div_id];
-        fig_id = div_id;
-        page_id = Page;
+        if (sessionStorage.importing !== undefined && JSON.parse(sessionStorage.place).figure == div_id) {
+          $scope.importing = true;
+          statements = JSON.parse(sessionStorage.importing);
+          sessionStorage.exploring = null;
+          // sessionStorage.importing = null;
+        } else {
+          $scope.importing = false;
+          statements = statementService[div_id];
+        }
+        console.log($scope.importing);
+        console.log(statements)
 
-        console.log('page');
-        console.log(Page);
+        fig_id = div_id;
+        page_id = Page.value;
 
         for (var i = 0; i < statements.length; i++){
           hist_insert(statements[i]);
@@ -49,7 +57,7 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
       $scope.explore = function () { // {{{
         // We still need a name for this mapping. 'exploring' works for now, lol
         sessionStorage.exploring = JSON.stringify(statements);
-        sessionStorage.location = {figure: fig_id, page: page_id};
+        sessionStorage.place = JSON.stringify({figure: fig_id, page: page_id});
         window.location.href = 'editor';
       }; // }}}
 

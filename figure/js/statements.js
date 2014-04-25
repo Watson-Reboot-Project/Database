@@ -1,9 +1,7 @@
 define(['angular'], function(angular) {
-  console.log('statements called');
   var app = angular.module('DatabaseApp', ['ui.bootstrap'])
 
   app.service('statementService', function () {
-    console.log('statements instantiated');
     var self = this;
 
     self.select1 = [//{{{
@@ -121,7 +119,5 @@ define(['angular'], function(angular) {
     ];//}}}
   });
 });
-
-console.log('statements loaded');
 
 /* vim: set fdm=marker : */

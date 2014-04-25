@@ -26,8 +26,8 @@ require(['angular', 'DatabaseApp', 'load', 'bootstrap'],
     var inner = 'figure/fragment.html';
 
     angular.module('DatabaseApp').service('Page', function () {
-      return 'informationUser2b2.html';
-    }
+      return {value: 'informationUser2b2.html'};
+    });
 
     for (var i = 0; i < divs.length; i++) {
       load(inner, divs[i]);

@@ -20,6 +20,7 @@ define(['angular', 'relations', 'ui-bootstrap'],
 
     // a list to hold the statement history
     $scope.history = [];
+    var self = this;
 
     // a generic "error" function
     $scope.error = function() {
@@ -76,8 +77,6 @@ define(['angular', 'relations', 'ui-bootstrap'],
 
     // insert a statement into the history
     var hist_insert = function (rel) { // {{{
-      console.log('in history');
-      console.log(rel);
       var index = $scope.history.length;
       $scope.history.push({relation: rel, remove: function () {
         entry = $scope.history[index];
@@ -95,14 +94,12 @@ define(['angular', 'relations', 'ui-bootstrap'],
     }; // }}}
 
     $scope.export_statements = function () {
-      console.log('exporting statements');
-      console.log($scope.history);
       var statements = [];
       for (var i = 0; i < $scope.history.length; i++) {
         statements.push($scope.history[i].relation.summary);
       }
       sessionStorage.importing = JSON.stringify(statements);
-      // window.location.href = 
+      window.location.href = self.page;
     };
 
     // initialize our things
@@ -114,8 +111,11 @@ define(['angular', 'relations', 'ui-bootstrap'],
 
       if (sessionStorage.exploring !== undefined) {
         $scope.exploring = true;
+        var place = JSON.parse(sessionStorage.place);
+        self.page = '../' + place.page;
         var statements = JSON.parse(sessionStorage.exploring);
         // sessionStorage.exploring = null;
+        sessionStorage.importing = null;
         for (var i = 0; i < statements.length; i++) {
           var stmt = statements[i];
           switch (stmt.action){
@@ -156,7 +156,7 @@ define(['angular', 'relations', 'ui-bootstrap'],
     // return an object to handle a 'select' action
     $scope.Select = function () { // {{{
       return new function () { // {{{
-        this.name = 'Select';
+        this.type = 'Select';
         this.page = 'partial/select.html';
         this.relation = {name: '[relation]'};
 
@@ -249,7 +249,7 @@ define(['angular', 'relations', 'ui-bootstrap'],
     // return an object to handle a 'project' action
     $scope.Project = function () { // {{{
       return new function () { // {{{
-        this.name = 'Project';
+        this.type = 'Project';
         this.page = 'partial/project.html';
         this.relation = {name: '[relation]'};
         this.dropdown = '[attribute]';
@@ -333,7 +333,7 @@ define(['angular', 'relations', 'ui-bootstrap'],
     // return an object to handle a 'join' action
     $scope.Join = function () { // {{{
       return new function () { // {{{
-        this.name = 'Join';
+        this.type = 'Join';
         this.page = 'partial/join.html';
         this.relation1 = {name: '[relation]'};
         this.relation2 = {name: '[relation]'};
@@ -466,7 +466,7 @@ define(['angular', 'relations', 'ui-bootstrap'],
     // return an object to placehold for an action
     $scope.Default = function () { // {{{
       return new function () {
-        this.name = 'Action';
+        this.type = 'Action';
         this.page = 'partial/default.html';
       }();
     }; // }}}

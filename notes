@@ -97,3 +97,19 @@ For Mike:
   - when loading in items, tack on top-level attribute `ng-init` -> `init(div_id)`
   - set up some service that has all the data in it as a mapping
   - each controller instance looks up its div and grabs that statement list
+
+---
+
+### working on getting the figure -> editor and editor -> figure exporting working
+
+- going from figure to editor
+  - in figure, we grab our statement datastruct and store it in sessionStorage
+    - using JSON.stringify and JSON.parse
+  - in editor, for each statement
+    - create new action objects, populate them, and run them
+- going from editor to figure
+  - in editor, when populating history for each relation created, we create a
+    `summary` object that represents a statement
+  - simply collect these `summary` objects, and store them in sessionStorage
+- in figure -> editor we store the page and figure, so that we can navigate
+  back from the editor
