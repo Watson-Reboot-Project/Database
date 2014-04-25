@@ -48,8 +48,8 @@
           </span >
           <span class='btn-group'>
             <span type='button' class='btn btn-success text-center' data-ng-click='action.accept()'>Accept</span >
-          </span > <span class='btn-group'>
-            <span type='button' class='btn btn-warning text-center' data-ng-click='export_statements()' data-ng-if='exploring'>Return</span >
+          </span > <span class='btn-group' data-ng-if='exploring'>
+            <span type='button' class='btn btn-warning text-center' data-ng-click='export_statements()'>Return</span >
           </span > <span class='btn-group'>
             <span type='button' class='btn btn-danger text-center' data-ng-click='action = Default()'>Cancel</span >
           </span >
