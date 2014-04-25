@@ -28,7 +28,7 @@ define(['angular', 'relations', 'ui-bootstrap'],
 
       $scope.export_statements = function () { // {{{
         save('importing');
-        sessionStorage[self.figure + '_savepoint'] = null;
+        delete sessionStorage[self.figure + '_savepoint'];
         window.location.href = self.page;
       }; // }}}
 
@@ -39,6 +39,7 @@ define(['angular', 'relations', 'ui-bootstrap'],
         }
         sessionStorage[name] = JSON.stringify(statements);
         console.log('saved');
+        console.log(statements);
       }; // }}}
 
       // supply generic names for our created relations
@@ -66,7 +67,7 @@ define(['angular', 'relations', 'ui-bootstrap'],
 
       // supply possible things to compare against
       $scope.getConditionValues = function (rel, attr) { // {{{
-        if (rel === undefined || rel.head === undefined) {
+        if (rel == undefined || rel.head == undefined) {
           return;
         }
         var index = rel.head.indexOf(attr),
@@ -117,29 +118,48 @@ define(['angular', 'relations', 'ui-bootstrap'],
         // a list to hold the statement history
         $scope.history = [];
 
-        if (sessionStorage.exploring !== undefined) {
+        console.log('entering init load sequence');
+
+        if (sessionStorage.exploring != undefined) {
+          console.log('exploring != undefined');
+          console.log(sessionStorage.exploring);
+
           $scope.exploring = true;
           var place = JSON.parse(sessionStorage.place);
           self.page = '../' + place.page;
           self.figure = place.figure;
 
-          if (sessionStorage[self.figure + '_savepoint'] !== undefined) {
+          if (sessionStorage[self.figure + '_savepoint'] != undefined) {
+            console.log('sessionStorage[figure_savepoint] != undefined');
+            console.log(sessionStorage[self.figure + '_savepoint']);
+
             var statements = JSON.parse(sessionStorage[self.figure + '_savepoint']);
           } else {
+            console.log('sessionStorage[figure_savepoint] == undefined');
+            console.log(sessionStorage[sessionStorage.exploring]);
+
             var statements = JSON.parse(sessionStorage.exploring);
           }
 
-          // sessionStorage.exploring = null;
-          sessionStorage.importing = null;
+          // delete sessionStorage.exploring;
+          delete sessionStorage.importing;
         } else {
+          console.log('exploring == undefined');
+
           $scope.exploring = false;
           self.figure = 'sandbox';
-          if (sessionStorage.sandbox_savepoint !== undefined) {
+          if (sessionStorage.sandbox_savepoint != undefined) {
+            console.log('sessionStorage.sandbox_savepoint != undefined');
+            console.log(sessionStorage.sandbox_savepoint);
+
             var statements = JSON.parse(sessionStorage.sandbox_savepoint);
           } else {
+            console.log('sessionStorage.sandbox_savepoint == undefined');
             var statements = [];
           }
         }
+
+        console.log(statements);
 
         for (var i = 0; i < statements.length; i++) { // {{{
           var stmt = statements[i];

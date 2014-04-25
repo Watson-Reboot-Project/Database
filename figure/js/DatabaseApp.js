@@ -34,11 +34,11 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
         // pulled in from database-simple/js/relations.js
         $scope.relations = relations_import;
 
-        if (sessionStorage.importing !== undefined && JSON.parse(sessionStorage.place).figure == div_id) {
+        if (sessionStorage.importing != undefined && JSON.parse(sessionStorage.place).figure == div_id) {
           $scope.importing = true;
           statements = JSON.parse(sessionStorage.importing);
-          sessionStorage.exploring = null;
-          // sessionStorage.importing = null;
+          delete sessionStorage.exploring;
+          // delete sessionStorage.importing;
         } else {
           $scope.importing = false;
           statements = statementService[div_id];
