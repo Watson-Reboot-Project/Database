@@ -39,7 +39,7 @@ define(['angular', 'relations', 'ui-bootstrap'],
         }
         sessionStorage[name] = JSON.stringify(statements);
         console.log('saved');
-        console.log(statements);
+        console.log('statements =', statements);
       }; // }}}
 
       // supply generic names for our created relations
@@ -105,6 +105,7 @@ define(['angular', 'relations', 'ui-bootstrap'],
             $scope.relation = $scope.history[$scope.history.length - 1].relation;
           }
 
+          $scope.action = $scope.Default();
           save(self.figure + '_savepoint');
         }});
       }; // }}}
@@ -122,7 +123,7 @@ define(['angular', 'relations', 'ui-bootstrap'],
 
         if (sessionStorage.exploring != undefined) {
           console.log('exploring != undefined');
-          console.log(sessionStorage.exploring);
+          console.log('sessionStorage.exploring =', sessionStorage.exploring);
 
           $scope.exploring = true;
           var place = JSON.parse(sessionStorage.place);
@@ -131,12 +132,12 @@ define(['angular', 'relations', 'ui-bootstrap'],
 
           if (sessionStorage[self.figure + '_savepoint'] != undefined) {
             console.log('sessionStorage[figure_savepoint] != undefined');
-            console.log(sessionStorage[self.figure + '_savepoint']);
+            console.log('sessionStorage[self.figure_savepoint] =', sessionStorage[self.figure + '_savepoint']);
 
             var statements = JSON.parse(sessionStorage[self.figure + '_savepoint']);
           } else {
             console.log('sessionStorage[figure_savepoint] == undefined');
-            console.log(sessionStorage[sessionStorage.exploring]);
+            console.log('sessionStorage[sessionStorage.exploring] =', sessionStorage[sessionStorage.exploring]);
 
             var statements = JSON.parse(sessionStorage.exploring);
           }
@@ -150,7 +151,7 @@ define(['angular', 'relations', 'ui-bootstrap'],
           self.figure = 'sandbox';
           if (sessionStorage.sandbox_savepoint != undefined) {
             console.log('sessionStorage.sandbox_savepoint != undefined');
-            console.log(sessionStorage.sandbox_savepoint);
+            console.log('sessionStorage.sandbox_savepoint =', sessionStorage.sandbox_savepoint);
 
             var statements = JSON.parse(sessionStorage.sandbox_savepoint);
           } else {
@@ -159,7 +160,7 @@ define(['angular', 'relations', 'ui-bootstrap'],
           }
         }
 
-        console.log(statements);
+        console.log('statements =', statements);
 
         for (var i = 0; i < statements.length; i++) { // {{{
           var stmt = statements[i];

@@ -43,8 +43,9 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
           $scope.importing = false;
           statements = statementService[div_id];
         }
-        console.log($scope.importing);
-        console.log(statements)
+        console.log('importing =', $scope.importing);
+        console.log('statements =', statements);
+        console.log('sessionStorage =', sessionStorage);
 
         fig_id = div_id;
         page_id = Page.value;

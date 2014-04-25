@@ -113,3 +113,12 @@ For Mike:
   - simply collect these `summary` objects, and store them in sessionStorage
 - in figure -> editor we store the page and figure, so that we can navigate
   back from the editor
+
+---
+
+### autosave design stuffs
+- we need some way to manually clear it.
+- half-baked attempts at guessing what the user wants are the devil
+- when is it useful / when do we need it?
+
+> **need to clear on deletion**
