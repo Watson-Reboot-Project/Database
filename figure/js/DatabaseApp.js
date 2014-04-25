@@ -11,39 +11,49 @@
 
 define(['angular', 'relations', 'statements', 'ui-bootstrap'],
   function (angular, relations_import) {
-    console.log('DatabaseApp called');
-
     // var app = angular.module('DatabaseApp', ['ui.bootstrap'])
     var app = angular.module('DatabaseApp')
 
-    app.controller('DatabaseController', function($scope, statementService) {
-      console.log('DatabaseController instantiated');
-
-      window.statementService = statementService;
-
-      $scope.init = function (div_id) {
-        console.log('init fired');
-
-        // pulled in from database-simple/js/relations.js
-        $scope.relations = relations_import;
-
-        var statements = statementService[div_id];
-
-        for (var i = 0; i < statements.length; i++){
-          hist_insert(statements[i]);
-        }
-      };
-
+    app.controller('DatabaseController', function ($scope, statementService, Page) {
       $scope.relations = {};
       $scope.history = [];
       var hist_index = 0;
 
-      $scope.error = function() {
+      $scope.error = function () {
         document.write('<h1>SOMETHING is WRONG.</h1>');
         throw new Error("something went wrong...");
       }
 
-      var hist_insert = function(stmt){ // {{{
+      // declaring these at app-level, so we can load up in init and still
+      // have them when we go exploring
+      var statements,
+          fig_id,
+          page_id;
+
+      $scope.init = function (div_id) { // {{{
+        // pulled in from database-simple/js/relations.js
+        $scope.relations = relations_import;
+
+        statements = statementService[div_id];
+        fig_id = div_id;
+        page_id = Page;
+
+        console.log('page');
+        console.log(Page);
+
+        for (var i = 0; i < statements.length; i++){
+          hist_insert(statements[i]);
+        }
+      }; // }}}
+
+      $scope.explore = function () { // {{{
+        // We still need a name for this mapping. 'exploring' works for now, lol
+        sessionStorage.exploring = JSON.stringify(statements);
+        sessionStorage.location = {figure: fig_id, page: page_id};
+        window.location.href = 'editor';
+      }; // }}}
+
+      var hist_insert = function (stmt) { // {{{
 
         switch (stmt.action){
           case 'select':
@@ -66,7 +76,7 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
         $scope.history.push({stmt: stmt, processed: false});
       } // }}}
 
-      $scope.next = function(){ // {{{
+      $scope.next = function () { // {{{
         if (hist_index < $scope.history.length) {
           item = $scope.history[hist_index];
           hist_index += 1;
@@ -84,7 +94,7 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
       } // }}}
 
       var actions = {
-        select: function(stmt) { // {{{
+        select: function (stmt) { // {{{
 
           // declare some stuff
           var rel = $scope.relations[stmt.relation],
@@ -102,17 +112,17 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
           // pull out our comparison operator
           var filter;
           if (stmt.condition == '<') {
-            filter = function(val1, val2) { return (val1 < val2); }
+            filter = function (val1, val2) { return (val1 < val2); }
           } else if (stmt.condition == '<=') {
-            filter = function(val1, val2) { return (val1 <= val2); }
+            filter = function (val1, val2) { return (val1 <= val2); }
           } else if (stmt.condition == '>') {
-            filter = function(val1, val2) { return (val1 > val2); }
+            filter = function (val1, val2) { return (val1 > val2); }
           } else if (stmt.condition == '>=') {
-            filter = function(val1, val2) { return (val1 >= val2); }
+            filter = function (val1, val2) { return (val1 >= val2); }
           } else if (stmt.condition == '==') {
-            filter = function(val1, val2) { return (val1 == val2); }
+            filter = function (val1, val2) { return (val1 == val2); }
           } else if (stmt.condition == '!=') {
-            filter = function(val1, val2) { return (val1 != val2); }
+            filter = function (val1, val2) { return (val1 != val2); }
           }
 
           // and filter it across our relation
@@ -128,7 +138,7 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
           $scope.relation = r_out;
         }, // }}}
 
-        project: function(stmt) { // {{{
+        project: function (stmt) { // {{{
 
           // declare some stuff
           var rel = $scope.relations[stmt.relation],
@@ -159,7 +169,7 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
           $scope.relation = r_out;
         }, // }}}
 
-        join: function(stmt) { // {{{
+        join: function (stmt) { // {{{
 
           // a name for our resulting relation
           var r_name = stmt.name,
@@ -225,7 +235,4 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
     return app;
   }
 );
-
-console.log('DatabaseApp loaded');
-
 /* vim: set fdm=marker : */

@@ -23,10 +23,14 @@ require(['angular', 'DatabaseApp', 'load', 'bootstrap'],
   function(angular, app, load) {
 
     var divs = ['select1'];
-    var name = 'figure/fragment.html';
+    var inner = 'figure/fragment.html';
+
+    angular.module('DatabaseApp').service('Page', function () {
+      return 'informationUser2b2.html';
+    }
 
     for (var i = 0; i < divs.length; i++) {
-      load(name, divs[i]);
+      load(inner, divs[i]);
     }
 
     angular.element(document).ready(function() {

@@ -6,7 +6,6 @@ require.config({
     jquery:         '../lib/js/jquery',
     'ui-bootstrap': '../lib/js/ui-bootstrap',
     relations:      '../common/relations',
-    load:           '../common/load',
     DatabaseApp:    'js/DatabaseApp'
   },
   shim: {

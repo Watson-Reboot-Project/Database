@@ -76,6 +76,15 @@ hr {
   font-weight: bold;
 }
 
+#relation {
+  overflow-x: auto;
+}
+
+#relation td,
+#relation th {
+  white-space: nowrap;
+}
+
 /* ======================================================================= */
 /* Copied and pasted from bootstrap.css to give preference to buttons.     */
 /* (was having issues w/ the buttons inside the list group)                */

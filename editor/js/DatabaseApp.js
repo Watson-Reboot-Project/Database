@@ -9,10 +9,8 @@
  * @version (2014,03,28)
 }}} */
 
-define(['angular', 'relations', 'load', 'ui-bootstrap'],
-    function (angular, relations, loader) {
-
-  loader('fragment.html', 'magic-div');
+define(['angular', 'relations', 'ui-bootstrap'],
+    function (angular, relations) {
 
   // make our app object
   var app = angular.module('DatabaseApp', ['ui.bootstrap']);
@@ -54,7 +52,7 @@ define(['angular', 'relations', 'load', 'ui-bootstrap'],
 
     // supply possible things to compare against
     $scope.getConditionValues = function (rel, attr) { // {{{
-      if (!rel.head) {
+      if (rel === undefined || rel.head === undefined) {
         return;
       }
       var index = rel.head.indexOf(attr),
@@ -78,6 +76,8 @@ define(['angular', 'relations', 'load', 'ui-bootstrap'],
 
     // insert a statement into the history
     var hist_insert = function (rel) { // {{{
+      console.log('in history');
+      console.log(rel);
       var index = $scope.history.length;
       $scope.history.push({relation: rel, remove: function () {
         entry = $scope.history[index];
@@ -92,6 +92,65 @@ define(['angular', 'relations', 'load', 'ui-bootstrap'],
           $scope.relation = $scope.history[$scope.history.length - 1].relation;
         }
       }});
+    }; // }}}
+
+    $scope.export_statements = function () {
+      console.log('exporting statements');
+      console.log($scope.history);
+      var statements = [];
+      for (var i = 0; i < $scope.history.length; i++) {
+        statements.push($scope.history[i].relation.summary);
+      }
+      sessionStorage.importing = JSON.stringify(statements);
+      // window.location.href = 
+    };
+
+    // initialize our things
+    var init = function () { // {{{
+      // set the first action to be 'default'
+      $scope.action = $scope.Default();
+      // pulled in from database/js/relations.js
+      $scope.relations = relations;
+
+      if (sessionStorage.exploring !== undefined) {
+        $scope.exploring = true;
+        var statements = JSON.parse(sessionStorage.exploring);
+        // sessionStorage.exploring = null;
+        for (var i = 0; i < statements.length; i++) {
+          var stmt = statements[i];
+          switch (stmt.action){
+            case 'select':
+              var action = $scope.Select();
+              action.name = stmt.name;
+              action.relation = $scope.relations[stmt.relation];
+              action.attribute = stmt.attribute;
+              action.condition = stmt.condition;
+              action.value = stmt.value;
+              action.accept();
+              break;
+            case 'project':
+              var action = $scope.Project();
+              action.name = stmt.name;
+              action.relation = $scope.relations[stmt.relation];
+              action.attributes = stmt.attributes;
+              action.accept();
+              break;
+            case 'join':
+              var action = $scope.Join();
+              action.name = stmt.name;
+              action.relation1 = $scope.relations[stmt.relation1];
+              action.relation2 = $scope.relations[stmt.relation2];
+              action.attribute = stmt.attribute;
+              action.accept();
+              break;
+            default:
+              $scope.error();
+              break;
+          }
+        }
+      } else {
+        $scope.exploring = false;
+      }
     }; // }}}
 
     // return an object to handle a 'select' action
@@ -126,15 +185,26 @@ define(['angular', 'relations', 'load', 'ui-bootstrap'],
         }; // }}}
 
         this.accept = function () { // {{{
+
+          if (this.relation.name === '[relation]' ||
+              this.attribute === '[attribute]' ||
+              this.condition === '[condition]' ||
+              this.value === '[value]') {
+            return;
+          }
+
           // declare some stuff
           var rows = this.relation.rows,
-              r_name = getNextName(),
+              r_name = (this.name)? this.name : getNextName(),
               index = this.relation.head.indexOf(this.attribute),
               r_out = {
                 name: r_name,
                 statement: r_name + ' <- SELECT FROM ' + this.relation.name +
                     ' WHERE ' + this.attribute + ' ' + this.condition + ' ' +
                     this.value + ';',
+                summary: {action: 'select', name: r_name, relation:
+                    this.relation.name, attribute: this.attribute, condition:
+                    this.condition, value: this.value},
                 head: this.relation.head.slice(),
                 rows: []
               };
@@ -217,15 +287,22 @@ define(['angular', 'relations', 'load', 'ui-bootstrap'],
 
         this.accept = function () { // {{{
 
+          if (this.relation.name === '[relation]' ||
+              this.attributes === []) {
+            return;
+          }
+
           // declare some stuff
           var head = this.relation.head,
               rows = this.relation.rows,
-              r_name = getNextName(),
+              r_name = (this.name)? this.name : getNextName(),
               indices = [],
               r_out = {
                 name: r_name,
                 statement: r_name + ' <- PROJECT ' + this.attributes.join(', ') +
                     ' FROM ' + this.relation.name + ';',
+                summary: {action: 'project', name: r_name, relation:
+                    this.relation.name, attributes: this.attributes},
                 head: this.attributes,
                 rows: []
               };
@@ -313,10 +390,17 @@ define(['angular', 'relations', 'load', 'ui-bootstrap'],
         // Fired when Join is active and accept is pressed
         // joins two tables, and puts the result in $scope.relations
         this.accept = function () { // {{{
+
+          if (this.relation1.name === '[relation]' ||
+              this.relation2.name === '[relation]' ||
+              this.attribute === '[attribute]') {
+            return;
+          }
+
           // the attributes from both input tables
           var both = this.relation1.head.concat(this.relation2.head),
               // a name for our resulting relation
-              r_name = getNextName(),
+              r_name = (this.name)? this.name : getNextName(),
               // our input relations
               relA = this.relation1,
               relB = this.relation2,
@@ -330,6 +414,9 @@ define(['angular', 'relations', 'load', 'ui-bootstrap'],
                 name: r_name,
                 statement: r_name + ' <- JOIN ' + this.relation1.name + ' AND ' +
                     this.relation2.name + ' OVER ' + this.attribute + ';',
+                summary: {action: 'join', name: r_name, relation1:
+                    this.relation1.name, relation2: this.relation2.name,
+                    attribute: this.attribute},
                 head: [],
                 rows: []
               };
@@ -384,11 +471,7 @@ define(['angular', 'relations', 'load', 'ui-bootstrap'],
       }();
     }; // }}}
 
-    // set the first action to be 'default'
-    $scope.action = $scope.Default();
-
-    // pulled in from database/js/relations.js
-    $scope.relations = relations;
+    init();
   });
 });
 

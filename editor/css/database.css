@@ -57,17 +57,18 @@
 /* } */
 
 /* adding horizontal scrolling to the table. eww, but it has to be done. */
-#current_relation {
+#relation {
   overflow-x: auto;
   margin-bottom: 12px;
 }
 
-#current_relation > table {
+#relation > table {
   margin-bottom: 0;
 }
 
-td {
-  min-width: 130px;
+#relation td,
+#relation th {
+  white-space: nowrap;
 }
 
 /* ======================================================================= */
