@@ -29,6 +29,9 @@ require(['angular', 'DatabaseApp', 'load', 'table', 'bootstrap'],
         {name: 'project1', page: figure_page},
         {name: 'Courses', page: table_page},
         {name: 'project2', page: figure_page},
+        {name: 'project_exercise1', page: figure_page},
+        {name: 'project_exercise2', page: figure_page},
+        {name: 'project_exercise3', page: figure_page},
     ];
 
     angular.module('DatabaseApp').service('Page', function () {

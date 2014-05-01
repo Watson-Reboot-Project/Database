@@ -31,7 +31,6 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
           page_id;
 
       $scope.init = function (div_id) { // {{{
-        // pulled in from database-simple/js/relations.js
         $scope.relations = relations_import;
 
         if (sessionStorage.importing != undefined && JSON.parse(sessionStorage.place).figure == div_id) {
@@ -41,7 +40,11 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
           // delete sessionStorage.importing;
         } else {
           $scope.importing = false;
-          statements = statementService[div_id];
+          if (statementService[div_id] != undefined) {
+            statements = statementService[div_id];
+          } else {
+            statements = [];
+          }
         }
         // console.log('importing =', $scope.importing);
         // console.log('statements =', statements);
@@ -78,6 +81,9 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
           case 'join':
             stmt.text = stmt.name + ' <- JOIN ' + stmt.relation1 + ' AND ' +
               stmt.relation2 + ' OVER ' + stmt.attribute + ';';
+            break;
+          case 'exercise':
+            // ... nothing?
             break;
           default:
             $scope.error();
@@ -238,6 +244,14 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
 
           $scope.relation = r_out;
           $scope.relations[r_out.name] = r_out;
+        }, // }}}
+
+        exercise: function (stmt) { // {{{
+          // if (stmt.question != undefined) {
+          //   sessionStorage.question = stmt.question;
+          // } else {
+          //   sessionStorage.question = "No Question!";
+          // }
         } // }}}
       }
 

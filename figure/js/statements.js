@@ -15,6 +15,16 @@ define(['angular'], function(angular) {
       }
     ]; // }}}
 
+    self.select_exercise1 = [ // {{{
+      {
+        action: 'exercise',
+        question: 'Produce a listing of the grades given by Dr. O’Neal (“ONeal '
+          + 'M. B.”) in all of his courses. The relation you produce should '
+          + 'contain only the student names, their grades, the name of the course '
+          + 'in which they made the grade, and the quarter and year of offering.',
+      }
+    ];
+
     self.project1 = [ // {{{
       {
         action: 'project',

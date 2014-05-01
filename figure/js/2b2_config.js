@@ -28,6 +28,10 @@ require(['angular', 'DatabaseApp', 'load', 'table', 'bootstrap'],
 
     var divs = [
         {name: 'select1', page: figure_page},
+        {name: 'select_exercise1', page: figure_page},
+        {name: 'select_exercise2', page: figure_page},
+        {name: 'select_exercise3', page: figure_page},
+        {name: 'select_exercise4', page: figure_page},
     ];
 
     angular.module('DatabaseApp').service('Page', function () {
