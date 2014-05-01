@@ -22,15 +22,21 @@ window.name = 'NG_DEFER_BOOTSTRAP!';
 require(['angular', 'DatabaseApp', 'load', 'bootstrap'],
   function(angular, app, load) {
 
-    var divs = ['select_project1', 'select_project2'];
-    var inner = 'figure/fragment.html';
+    var figure_page = 'figure/figure.html';
+    var table_page = 'figure/table.html';
+
+    var divs = [
+        {name: 'select_project1', page: figure_page},
+        {name: 'select_project2', page: figure_page},
+    ];
 
     angular.module('DatabaseApp').service('Page', function () {
       return {value: 'informationUser2b4.html'};
     });
 
-    for (var i = 0; i < divs.length; i++) {
-      load(inner, divs[i]);
+    for (var i = 0, item; i < divs.length; i++) {
+      item = divs[i];
+      load(item.page, item.name);
     }
 
     angular.element(document).ready(function() {

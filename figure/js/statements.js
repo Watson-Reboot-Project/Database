@@ -4,7 +4,7 @@ define(['angular'], function(angular) {
   app.service('statementService', function () {
     var self = this;
 
-    self.select1 = [//{{{
+    self.select1 = [ // {{{
       {
         action: 'select',
         name: 'Relation1',
@@ -13,27 +13,27 @@ define(['angular'], function(angular) {
         condition: '==',
         value: 'CS'
       }
-    ];//}}}
+    ]; // }}}
 
-    self.project1 = [//{{{
+    self.project1 = [ // {{{
       {
         action: 'project',
         name: 'Relation1',
         relation: 'Faculty',
         attributes: ['FName', 'Phone']
       }
-    ];//}}}
+    ]; // }}}
 
-    self.project2 = [//{{{
+    self.project2 = [ // {{{
       {
         action: 'project',
         name: 'Relation1',
         relation: 'Courses',
         attributes: ['Course', 'Credits']
       }
-    ];//}}}
+    ]; // }}}
 
-    self.join1 = [//{{{
+    self.join1 = [ // {{{
       {
         action: 'join',
         name: 'Relation1',
@@ -41,9 +41,9 @@ define(['angular'], function(angular) {
         relation2: 'Courses',
         attribute: 'FName'
       }
-    ];//}}}
+    ]; // }}}
 
-    self.select_project1 = [//{{{
+    self.select_project1 = [ // {{{
       {
         action: 'select',
         name: 'CS_Majors',
@@ -57,9 +57,9 @@ define(['angular'], function(angular) {
         relation: 'CS_Majors',
         attributes: ['SName']
       }
-    ];//}}}
+    ]; // }}}
 
-    self.select_project2 = [//{{{
+    self.select_project2 = [ // {{{
       {
         action: 'select',
         name: 'CS100',
@@ -87,9 +87,9 @@ define(['angular'], function(angular) {
         relation: 'CS100_Fall_2012',
         attributes: ['FName']
       }
-    ];//}}}
+    ]; // }}}
 
-    self.all1 = [//{{{
+    self.all1 = [ // {{{
       {
         action: 'join',
         name: 'Rel1',
@@ -116,7 +116,7 @@ define(['angular'], function(angular) {
         relation: 'Rel3',
         attributes: ['Course', 'SEQ_NO', 'FName', 'Office', 'Phone']
       }
-    ];//}}}
+    ]; // }}}
   });
 });
 

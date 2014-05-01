@@ -52,6 +52,7 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
 
         for (var i = 0; i < statements.length; i++){
           hist_insert(statements[i]);
+          $scope.next();
         }
       }; // }}}
 
