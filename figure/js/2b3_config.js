@@ -8,6 +8,7 @@ require.config({
     relations:      'common/relations',
     load:           'figure/js/load',
     DatabaseApp:    'figure/js/DatabaseApp',
+    table:          'figure/js/table',
     statements:     'figure/js/statements'
   },
   shim: {
@@ -19,9 +20,8 @@ require.config({
 
 window.name = 'NG_DEFER_BOOTSTRAP!';
 
-require(['angular', 'DatabaseApp', 'load', 'bootstrap'],
+require(['angular', 'DatabaseApp', 'load', 'table', 'bootstrap'],
   function(angular, app, load) {
-
     var figure_page = 'figure/figure.html';
     var table_page = 'figure/table.html';
 

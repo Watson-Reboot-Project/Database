@@ -119,5 +119,4 @@ define(['angular'], function(angular) {
     ]; // }}}
   });
 });
-
 /* vim: set fdm=marker : */
