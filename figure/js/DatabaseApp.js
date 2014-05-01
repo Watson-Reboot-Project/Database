@@ -41,12 +41,10 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
           // delete sessionStorage.importing;
         } else {
           $scope.importing = false;
-          if (statementService[div_id] != undefined) {
-            statements = statementService[div_id];
-          } else {
-            statements = [];
-          }
+          statements = statementService[div_id];
         }
+
+        if (/exercise/.test(
 
         fig_id = div_id;
         page_id = Page.value;
@@ -73,6 +71,7 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
         if (hist_index < $scope.history.length) {
           item = $scope.history[hist_index];
           hist_index += 1;
+          // Process the statement!
           actions[item.stmt.action](item.stmt);
           item.processed = true;
           $scope.active = item.stmt.text;
@@ -101,9 +100,6 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
           case 'join':
             stmt.text = stmt.name + ' <- JOIN ' + stmt.relation1 + ' AND ' +
               stmt.relation2 + ' OVER ' + stmt.attribute + ';';
-            break;
-          case 'exercise':
-            // ... nothing?
             break;
           default:
             $scope.error();
