@@ -23,7 +23,7 @@ define(['angular'], function(angular) {
           + 'contain only the student names, their grades, the name of the course '
           + 'in which they made the grade, and the quarter and year of offering.',
       }
-    ];
+    ]; // }}}
 
     self.project1 = [ // {{{
       {

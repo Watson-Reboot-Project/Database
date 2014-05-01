@@ -19,16 +19,17 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
       $scope.history = [];
       var hist_index = 0;
 
-      $scope.error = function () {
+      $scope.error = function () { // {{{
         document.write('<h1>SOMETHING is WRONG.</h1>');
         throw new Error("something went wrong...");
-      }
+      } // }}}
 
       // declaring these at app-level, so we can load up in init and still
       // have them when we go exploring
       var statements,
           fig_id,
-          page_id;
+          page_id,
+          question;
 
       $scope.init = function (div_id) { // {{{
         $scope.relations = relations_import;
@@ -46,9 +47,6 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
             statements = [];
           }
         }
-        // console.log('importing =', $scope.importing);
-        // console.log('statements =', statements);
-        // console.log('sessionStorage =', sessionStorage);
 
         fig_id = div_id;
         page_id = Page.value;
@@ -63,8 +61,30 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
         // We still need a name for this mapping. 'exploring' works for now, lol
         sessionStorage.exploring = JSON.stringify(statements);
         sessionStorage.place = JSON.stringify({figure: fig_id, page: page_id});
+
+        if (question != undefined) {
+          sessionStorage.question = question;
+        }
+
         window.location.href = 'editor';
       }; // }}}
+
+      $scope.next = function () { // {{{
+        if (hist_index < $scope.history.length) {
+          item = $scope.history[hist_index];
+          hist_index += 1;
+          actions[item.stmt.action](item.stmt);
+          item.processed = true;
+          $scope.active = item.stmt.text;
+        } else {
+          hist_index = 0;
+          $scope.active = null;
+          $scope.relation = null;
+          for (var i=0; i < $scope.history.length; i++) {
+            $scope.history[i].processed = false;
+          }
+        }
+      } // }}}
 
       var hist_insert = function (stmt) { // {{{
 
@@ -90,23 +110,6 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
             break;
         }
         $scope.history.push({stmt: stmt, processed: false});
-      } // }}}
-
-      $scope.next = function () { // {{{
-        if (hist_index < $scope.history.length) {
-          item = $scope.history[hist_index];
-          hist_index += 1;
-          actions[item.stmt.action](item.stmt);
-          item.processed = true;
-          $scope.active = item.stmt.text;
-        } else {
-          hist_index = 0;
-          $scope.active = null;
-          $scope.relation = null;
-          for (var i=0; i < $scope.history.length; i++) {
-            $scope.history[i].processed = false;
-          }
-        }
       } // }}}
 
       var actions = {

@@ -22,6 +22,7 @@ window.name = 'NG_DEFER_BOOTSTRAP!';
 
 require(['angular', 'DatabaseApp', 'load', 'table', 'bootstrap'],
   function(angular, app, load) {
+
     var figure_page = 'figure/figure.html';
     var table_page = 'figure/table.html';
 
