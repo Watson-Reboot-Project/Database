@@ -46,6 +46,7 @@
 
 #editor_panel {
   height: auto;
+  padding: 0;
 }
 
 #default {
@@ -68,6 +69,12 @@
 
 #relation {
   overflow-x: auto;
+}
+
+#relation > table {
+  margin-left: auto;
+  margin-right: auto;
+  width: initial;
 }
 
 #relation td,

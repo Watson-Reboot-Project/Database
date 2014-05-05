@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app='DatabaseApp'>
   <head>
     <meta charset="utf-8">
 
@@ -15,6 +15,7 @@
     <link href = "../lib/css/bootstrap.css" rel = "stylesheet">
     <link href = "../lib/css/styles.css" rel = "stylesheet">
     <link href = "../lib/css/generalmedia.css" rel = "stylesheet">
+    <link href = "figure/css/database.css" rel = "stylesheet">
     <!-- Java Script files -->
     <script type="text/javascript" src="../lib/js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../lib/js/bootstrap.min.js"></script>
@@ -60,7 +61,9 @@
         <span class="figNum studentrelation"></span> presents another relation from our university database. This relation is the “Students” relation, which keeps up with all of the various kinds of information maintained about students. The “Students” relation consists of eight attributes: “Sname”, “Age”, “Major”, “ID”, “Sex”, “Address”, “City”, and “State”; and twenty tuples, one for each student attending this (quite small) university.
       </p>
 
-      <img src="images/studentrelation.png" alt="the “Students” relation – part of a university database" class="Image">
+      <!-- <img src="images/studentrelation.png" alt="the “Students” relation – part of a university database" class="Image"> -->
+
+      <div id='Students'></div>
 
       <p class="Figure">
         <span class="figNum studentrelation"></span> the “Students” relation – part of a university database
@@ -132,5 +135,6 @@
         ga('send', 'pageview');
       </script>
 
+  <script type='text/javascript' data-main='figure/js/2b1_config' src='lib/js/require.js'></script>
   </body>
 </html>
