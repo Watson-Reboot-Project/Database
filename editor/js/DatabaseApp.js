@@ -111,8 +111,8 @@ define(['angular', 'relations', 'ui-bootstrap'],
           statements.push($scope.history[i].relation.summary);
         }
         sessionStorage[name] = JSON.stringify(statements);
-        console.log('saved');
-        console.log('statements =', statements);
+        // console.log('saved');
+        // console.log('statements =', statements);
       }; // }}}
 
       // supply generic names for our created relations

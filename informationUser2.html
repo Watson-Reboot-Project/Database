@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app='DatabaseApp'>
   <head>
     <meta charset="utf-8">
 
@@ -12,11 +12,12 @@
     <!-- Google fonts -->
     <link href='http://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
     <!-- CSS files -->
-	    <link href = "../lib/images/favicon.ico" rel="icon" type="image/png">
-	  <link href="../lib/images/favicon.ico" rel="icon" type="image/png">
-		<link href = "../lib/css/bootstrap.css" rel = "stylesheet">
-		<link href="../lib/css/styles.css" rel="stylesheet">
+      <link href = "../lib/images/favicon.ico" rel="icon" type="image/png">
+    <link href="../lib/images/favicon.ico" rel="icon" type="image/png">
+    <link href = "../lib/css/bootstrap.css" rel = "stylesheet">
+    <link href="../lib/css/styles.css" rel="stylesheet">
     <link href = "../lib/css/generalmedia.css" rel = "stylesheet">
+    <link href = "figure/css/database.css" rel = "stylesheet">
     <!-- Java Script files -->
     <script type="text/javascript" src="../lib/js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../lib/js/bootstrap.min.js"></script>
@@ -36,9 +37,9 @@
       <div id="includedContentForPage"></div>
       <!-- End Navbar -->
 
-		<div id="wrapper" class="page-wrapper">
-			<a id="tippytop"></a>
-			<!-- Header division -->
+    <div id="wrapper" class="page-wrapper">
+      <a id="tippytop"></a>
+      <!-- Header division -->
 
       <!-- Main content -->
       <p class="Section">
@@ -79,7 +80,8 @@
         </li>
       </ul>
 
-      <img src="images/facultyrelation.png" alt="The “Faculty” relation – part of a university database" class="Image">
+      <!-- <img src="images/facultyrelation.png" alt="The “Faculty” relation – part of a university database" class="Image"> -->
+      <div id='Faculty'></div>
 
       <p class="Figure">
         <span class="figNum facultyrelation"></span> The “Faculty” relation – part of a university database
@@ -94,7 +96,7 @@
 
     </div> <!-- End wrapper -->
 
-		<div class="blueFooterBar"></div> <!-- populates the bottom footer -->
+    <div class="blueFooterBar"></div> <!-- populates the bottom footer -->
 
     <script>
       var pageObj;                      // do NOT change name of variable
@@ -119,5 +121,6 @@
         ga('send', 'pageview');
       </script>
 
+  <script type='text/javascript' data-main='figure/js/2_config' src='lib/js/require.js'></script>
   </body>
 </html>

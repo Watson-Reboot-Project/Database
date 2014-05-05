@@ -35,19 +35,19 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
         $scope.relations = relations_import;
 
         if (sessionStorage.importing != undefined && JSON.parse(sessionStorage.place).figure == div_id) {
-          console.log('importing!');
+          // console.log('importing!');
           $scope.importing = true;
           statements = JSON.parse(sessionStorage.importing);
           delete sessionStorage.exploring;
           delete sessionStorage.question;
           // delete sessionStorage.importing;
         } else {
-          console.log('not importing!');
+          // console.log('not importing!');
           $scope.importing = false;
           statements = statementService[div_id];
         }
 
-        console.log(statements);
+        // console.log(statements);
 
         // semi-hack: bringing in exercise information through the statement
         // ... interface? service.

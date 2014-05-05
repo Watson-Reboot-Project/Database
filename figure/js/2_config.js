@@ -27,18 +27,11 @@ require(['angular', 'DatabaseApp', 'load', 'table', 'bootstrap'],
     var table_page = 'figure/table.html';
 
     var divs = [
-        {name: 'select_project1', page: figure_page},
-        {name: 'select_project2', page: figure_page},
-        {name: 'select_project_exercise1', page: figure_page},
-        {name: 'select_project_exercise2', page: figure_page},
-        {name: 'select_project_exercise3', page: figure_page},
-        {name: 'select_project_exercise4', page: figure_page},
-        {name: 'select_project_exercise5', page: figure_page},
-        {name: 'select_project_exercise6', page: figure_page},
+        {name: 'Faculty', page: table_page},
     ];
 
     angular.module('DatabaseApp').service('Page', function () {
-      return {value: 'informationUser2b4.html'};
+      return {value: 'informationUser2.html'};
     });
 
     for (var i = 0, item; i < divs.length; i++) {
