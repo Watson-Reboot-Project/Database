@@ -46,6 +46,7 @@
 
 #editor_panel {
   height: auto;
+  min-height: 40px;
   padding: 0;
 }
 

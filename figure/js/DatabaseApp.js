@@ -39,27 +39,24 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
           $scope.importing = true;
           statements = JSON.parse(sessionStorage.importing);
           delete sessionStorage.exploring;
+          delete sessionStorage.question;
           // delete sessionStorage.importing;
         } else {
           console.log('not importing!');
           $scope.importing = false;
           statements = statementService[div_id];
-
-          // TODO: remove when all exercises are defined
-          if (!statements) {
-            console.log('no statements!')
-            statements = [];
-          }
         }
 
         console.log(statements);
 
         // semi-hack: bringing in exercise information through the statement
         // ... interface? service.
-        // TODO: remove length predicate when all exercises are defined
-        if (statements.length > 0 && statements[0].action == 'exercise') {
+        if (statements[0].action == 'exercise') {
           question = statements[0].question;
           statements = [];
+          $scope.explore_text = 'Solve!';
+        } else {
+          $scope.explore_text = 'Explore!';
         }
 
         fig_id = div_id;
