@@ -150,3 +150,4 @@ define(function() {
 
   return relations;
 });
+// vim: fdm=marker

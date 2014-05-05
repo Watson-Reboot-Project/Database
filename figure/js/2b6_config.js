@@ -23,13 +23,14 @@ window.name = 'NG_DEFER_BOOTSTRAP!';
 require(['angular', 'DatabaseApp', 'load', 'table', 'bootstrap'],
   function(angular, app, load) {
 
-    var divs = ['all1'];
     var figure_page = 'figure/figure.html';
     var table_page = 'figure/table.html';
 
     var divs = [
         {name: 'all1', page: figure_page},
         {name: 'Grades', page: table_page},
+        {name: 'all2', page: figure_page},
+        {name: 'all3', page: figure_page},
         {name: 'all_exercise1', page: figure_page},
         {name: 'all_exercise2', page: figure_page},
         {name: 'all_exercise3', page: figure_page},

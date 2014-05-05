@@ -27,16 +27,11 @@ require(['angular', 'DatabaseApp', 'load', 'table', 'bootstrap'],
     var table_page = 'figure/table.html';
 
     var divs = [
-        {name: 'project1', page: figure_page},
-        {name: 'Courses', page: table_page},
-        {name: 'project2', page: figure_page},
-        {name: 'project_exercise1', page: figure_page},
-        {name: 'project_exercise2', page: figure_page},
-        {name: 'project_exercise3', page: figure_page},
+        {name: 'Students', page: table_page},
     ];
 
     angular.module('DatabaseApp').service('Page', function () {
-      return {value: 'informationUser2b3.html'};
+      return {value: 'informationUser2b1.html'};
     });
 
     for (var i = 0, item; i < divs.length; i++) {
@@ -49,3 +44,4 @@ require(['angular', 'DatabaseApp', 'load', 'table', 'bootstrap'],
     });
   }
 );
+

@@ -6,7 +6,7 @@
  * interface for the webpage.
  *
  * @author Tommy Bozeman
- * @version (2014,03,28)
+ * @version (2014,04,04)
 }}} */
 
 define(['angular', 'relations', 'ui-bootstrap'],
@@ -20,7 +20,80 @@ define(['angular', 'relations', 'ui-bootstrap'],
 
       var self = this;
 
-      // a generic "error" function
+      // initialize our things
+      var init = function () { // {{{
+        // set the first action to be 'default'
+        $scope.action = $scope.Default();
+        // pulled in from database/js/relations.js
+        $scope.relations = relations;
+        // a list to hold the statement history
+        $scope.history = [];
+
+        if (sessionStorage.exploring != undefined) {
+          $scope.exploring = true;
+          var place = JSON.parse(sessionStorage.place);
+          self.page = '../' + place.page;
+          self.figure = place.figure;
+
+          if (sessionStorage[self.figure + '_savepoint'] != undefined) {
+            var statements = JSON.parse(sessionStorage[self.figure + '_savepoint']);
+          } else {
+            var statements = JSON.parse(sessionStorage.exploring);
+          }
+
+          // delete sessionStorage.exploring;
+          delete sessionStorage.importing;
+        } else {
+          $scope.exploring = false;
+          self.figure = 'sandbox';
+          if (sessionStorage.sandbox_savepoint != undefined) {
+            var statements = JSON.parse(sessionStorage.sandbox_savepoint);
+          } else {
+            var statements = [];
+          }
+        }
+
+        for (var i = 0; i < statements.length; i++) { // {{{
+          var stmt = statements[i];
+          switch (stmt.action){
+            case 'select':
+              var action = $scope.Select();
+              action.name = stmt.name;
+              action.relation = $scope.relations[stmt.relation];
+              action.attribute = stmt.attribute;
+              action.condition = stmt.condition;
+              action.value = stmt.value;
+              action.accept();
+              break;
+            case 'project':
+              var action = $scope.Project();
+              action.name = stmt.name;
+              action.relation = $scope.relations[stmt.relation];
+              action.attributes = stmt.attributes;
+              action.accept();
+              break;
+            case 'join':
+              var action = $scope.Join();
+              action.name = stmt.name;
+              action.relation1 = $scope.relations[stmt.relation1];
+              action.relation2 = $scope.relations[stmt.relation2];
+              action.attribute = stmt.attribute;
+              action.accept();
+              break;
+            case 'exercise':
+              // ...nothing?
+              break;
+            default:
+              $scope.error();
+              break;
+          } // }}}
+        }
+
+        if (sessionStorage.question != undefined) {
+          $scope.question = sessionStorage.question;
+        }
+      }; // }}}
+
       $scope.error = function() { // {{{
         document.write('<h1>SOMETHING is WRONG.</h1>');
         throw new Error("something went wrong...");
@@ -108,99 +181,6 @@ define(['angular', 'relations', 'ui-bootstrap'],
           $scope.action = $scope.Default();
           save(self.figure + '_savepoint');
         }});
-      }; // }}}
-
-      // initialize our things
-      var init = function () { // {{{
-        // set the first action to be 'default'
-        $scope.action = $scope.Default();
-        // pulled in from database/js/relations.js
-        $scope.relations = relations;
-        // a list to hold the statement history
-        $scope.history = [];
-
-        // console.log('entering init load sequence');
-
-        if (sessionStorage.exploring != undefined) {
-          // console.log('exploring != undefined');
-          // console.log('sessionStorage.exploring =', sessionStorage.exploring);
-
-          $scope.exploring = true;
-          var place = JSON.parse(sessionStorage.place);
-          self.page = '../' + place.page;
-          self.figure = place.figure;
-
-          if (sessionStorage[self.figure + '_savepoint'] != undefined) {
-            // console.log('sessionStorage[figure_savepoint] != undefined');
-            // console.log('sessionStorage[self.figure_savepoint] =', sessionStorage[self.figure + '_savepoint']);
-
-            var statements = JSON.parse(sessionStorage[self.figure + '_savepoint']);
-          } else {
-            // console.log('sessionStorage[figure_savepoint] == undefined');
-            // console.log('sessionStorage[sessionStorage.exploring] =', sessionStorage[sessionStorage.exploring]);
-
-            var statements = JSON.parse(sessionStorage.exploring);
-          }
-
-          // delete sessionStorage.exploring;
-          delete sessionStorage.importing;
-        } else {
-          // console.log('exploring == undefined');
-
-          $scope.exploring = false;
-          self.figure = 'sandbox';
-          if (sessionStorage.sandbox_savepoint != undefined) {
-            // console.log('sessionStorage.sandbox_savepoint != undefined');
-            // console.log('sessionStorage.sandbox_savepoint =', sessionStorage.sandbox_savepoint);
-
-            var statements = JSON.parse(sessionStorage.sandbox_savepoint);
-          } else {
-            // console.log('sessionStorage.sandbox_savepoint == undefined');
-            var statements = [];
-          }
-        }
-
-        // console.log('statements =', statements);
-
-        for (var i = 0; i < statements.length; i++) { // {{{
-          var stmt = statements[i];
-          switch (stmt.action){
-            case 'select':
-              var action = $scope.Select();
-              action.name = stmt.name;
-              action.relation = $scope.relations[stmt.relation];
-              action.attribute = stmt.attribute;
-              action.condition = stmt.condition;
-              action.value = stmt.value;
-              action.accept();
-              break;
-            case 'project':
-              var action = $scope.Project();
-              action.name = stmt.name;
-              action.relation = $scope.relations[stmt.relation];
-              action.attributes = stmt.attributes;
-              action.accept();
-              break;
-            case 'join':
-              var action = $scope.Join();
-              action.name = stmt.name;
-              action.relation1 = $scope.relations[stmt.relation1];
-              action.relation2 = $scope.relations[stmt.relation2];
-              action.attribute = stmt.attribute;
-              action.accept();
-              break;
-            case 'exercise':
-              // ...nothing?
-              break;
-            default:
-              $scope.error();
-              break;
-          } // }}}
-        }
-
-        if (sessionStorage.question != undefined) {
-          $scope.question = sessionStorage.question;
-        }
       }; // }}}
 
       // return an object to handle a 'select' action

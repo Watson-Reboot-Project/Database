@@ -6,7 +6,7 @@
  * interface for the webpage.
  *
  * @author Tommy Bozeman
- * @version (2014,03,28)
+ * @version (2014,04,04)
 }}} */
 
 define(['angular', 'relations', 'statements', 'ui-bootstrap'],
@@ -19,36 +19,48 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
       $scope.history = [];
       var hist_index = 0;
 
-      $scope.error = function () {
+      $scope.error = function () { // {{{
         document.write('<h1>SOMETHING is WRONG.</h1>');
         throw new Error("something went wrong...");
-      }
+      } // }}}
 
       // declaring these at app-level, so we can load up in init and still
       // have them when we go exploring
       var statements,
           fig_id,
-          page_id;
+          page_id,
+          question;
 
       $scope.init = function (div_id) { // {{{
         $scope.relations = relations_import;
 
         if (sessionStorage.importing != undefined && JSON.parse(sessionStorage.place).figure == div_id) {
+          console.log('importing!');
           $scope.importing = true;
           statements = JSON.parse(sessionStorage.importing);
           delete sessionStorage.exploring;
           // delete sessionStorage.importing;
         } else {
+          console.log('not importing!');
           $scope.importing = false;
-          if (statementService[div_id] != undefined) {
-            statements = statementService[div_id];
-          } else {
+          statements = statementService[div_id];
+
+          // TODO: remove when all exercises are defined
+          if (!statements) {
+            console.log('no statements!')
             statements = [];
           }
         }
-        // console.log('importing =', $scope.importing);
-        // console.log('statements =', statements);
-        // console.log('sessionStorage =', sessionStorage);
+
+        console.log(statements);
+
+        // semi-hack: bringing in exercise information through the statement
+        // ... interface? service.
+        // TODO: remove length predicate when all exercises are defined
+        if (statements.length > 0 && statements[0].action == 'exercise') {
+          question = statements[0].question;
+          statements = [];
+        }
 
         fig_id = div_id;
         page_id = Page.value;
@@ -63,8 +75,31 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
         // We still need a name for this mapping. 'exploring' works for now, lol
         sessionStorage.exploring = JSON.stringify(statements);
         sessionStorage.place = JSON.stringify({figure: fig_id, page: page_id});
+
+        if (question != undefined) {
+          sessionStorage.question = question;
+        }
+
         window.location.href = 'editor';
       }; // }}}
+
+      $scope.next = function () { // {{{
+        if (hist_index < $scope.history.length) {
+          item = $scope.history[hist_index];
+          hist_index += 1;
+          // Process the statement!
+          actions[item.stmt.action](item.stmt);
+          item.processed = true;
+          $scope.active = item.stmt.text;
+        } else {
+          hist_index = 0;
+          $scope.active = null;
+          $scope.relation = null;
+          for (var i=0; i < $scope.history.length; i++) {
+            $scope.history[i].processed = false;
+          }
+        }
+      } // }}}
 
       var hist_insert = function (stmt) { // {{{
 
@@ -82,31 +117,11 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
             stmt.text = stmt.name + ' <- JOIN ' + stmt.relation1 + ' AND ' +
               stmt.relation2 + ' OVER ' + stmt.attribute + ';';
             break;
-          case 'exercise':
-            // ... nothing?
-            break;
           default:
             $scope.error();
             break;
         }
         $scope.history.push({stmt: stmt, processed: false});
-      } // }}}
-
-      $scope.next = function () { // {{{
-        if (hist_index < $scope.history.length) {
-          item = $scope.history[hist_index];
-          hist_index += 1;
-          actions[item.stmt.action](item.stmt);
-          item.processed = true;
-          $scope.active = item.stmt.text;
-        } else {
-          hist_index = 0;
-          $scope.active = null;
-          $scope.relation = null;
-          for (var i=0; i < $scope.history.length; i++) {
-            $scope.history[i].processed = false;
-          }
-        }
       } // }}}
 
       var actions = {
