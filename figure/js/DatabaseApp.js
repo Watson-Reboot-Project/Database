@@ -34,30 +34,35 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
       $scope.init = function (div_id) { // {{{
         $scope.relations = relations_import;
 
+        // figure out where the data is coming from
         if (sessionStorage.importing != undefined && JSON.parse(sessionStorage.place).figure == div_id) {
-          // console.log('importing!');
+          console.log('importing!');
           $scope.importing = true;
           statements = JSON.parse(sessionStorage.importing);
-          delete sessionStorage.exploring;
-          delete sessionStorage.question;
-          // delete sessionStorage.importing;
         } else {
-          // console.log('not importing!');
+          console.log('not importing!');
           $scope.importing = false;
           statements = statementService[div_id];
         }
 
-        // console.log(statements);
+        $scope.explore_text = 'Explore!';
 
-        // semi-hack: bringing in exercise information through the statement
-        // ... interface? service.
-        if (statements[0].action == 'exercise') {
-          question = statements[0].question;
-          statements = [];
+        // semi-hack: bringing in exercise information through the
+        // statementService; relies on exercises being named such
+        if (/exercise/.test(div_id)) {
+          console.log('exercise!');
+          if ($scope.importing) {
+            holding = statementService[div_id][0];
+          } else {
+            holding = statements[0];
+            statements = [];
+          }
+          question = holding.question;
           $scope.explore_text = 'Solve!';
-        } else {
-          $scope.explore_text = 'Explore!';
         }
+
+        delete sessionStorage.exploring;
+        delete sessionStorage.question;
 
         fig_id = div_id;
         page_id = Page.value;
@@ -73,6 +78,7 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
         sessionStorage.exploring = JSON.stringify(statements);
         sessionStorage.place = JSON.stringify({figure: fig_id, page: page_id});
 
+        console.log(question);
         if (question != undefined) {
           sessionStorage.question = question;
         }
@@ -259,11 +265,8 @@ define(['angular', 'relations', 'statements', 'ui-bootstrap'],
         }, // }}}
 
         exercise: function (stmt) { // {{{
-          // if (stmt.question != undefined) {
-          //   sessionStorage.question = stmt.question;
-          // } else {
-          //   sessionStorage.question = "No Question!";
-          // }
+          $scope.error();
+          console.log('used the exercise function!');
         } // }}}
       }
 

@@ -129,3 +129,9 @@ For Mike:
 - show figure relations by default
 - be able to show tables w/o statement (student relation figure, etc.)
 - go ahead and do exercises
+
+---
+
+### 2014-05-05
+- working on refining the way we pull in data, base on a combination of whether
+  or not we are a figure and/or importing.
